@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>owo · 插畫與視覺設計</title>
+<meta name="description" content="owo 的個人網頁：插畫、貼圖與品牌視覺，作品精選與聯絡方式。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* palette · strawberry-milk studio, OKLCH */
+    --bg: oklch(0.990 0.008 350);
+    --surface: oklch(0.958 0.028 350);
+    --surface-2: oklch(0.925 0.045 350);
+    --primary: oklch(0.60 0.19 358);
+    --primary-deep: oklch(0.48 0.165 355);
+    --ink: oklch(0.27 0.045 285);
+    --muted: oklch(0.47 0.055 300);
+    --cream: oklch(0.972 0.012 40);
+    --butter: oklch(0.900 0.125 95);
+    --mint: oklch(0.820 0.115 165);
+
+    /* type */
+    --font-display: "LXGW WenKai TC", "Noto Sans TC", serif;
+    --font-body: "Noto Sans TC", sans-serif;
+
+    /* z-index scale */
+    --z-sticky: 100;
+    --z-tooltip: 200;
+
+    /* spacing rhythm */
+    --space-section: clamp(4.5rem, 10vw, 8rem);
+
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--butter); color: var(--ink); }
+
+  a { color: inherit; }
+
+  :is(a, button):focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  img { display: block; max-width: 100%; }
+
+  .wrap {
+    max-width: 68rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+  }
+
+  /* ---------- header ---------- */
+  .site-head {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+    background: color-mix(in oklab, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid color-mix(in oklab, var(--surface-2) 70%, transparent);
+  }
+  .site-head .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 0.85rem;
+  }
+  .logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.35rem;
+    text-decoration: none;
+    color: var(--primary-deep);
+    display: inline-flex;
+  }
+  .logo span { display: inline-block; animation: blink 5.2s infinite; }
+  .logo span:nth-child(2) { animation-delay: 0.15s; }
+  @keyframes blink {
+    0%, 92%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.12); }
+  }
+  .site-head nav {
+    display: flex;
+    gap: clamp(1rem, 3vw, 2rem);
+  }
+  .site-head nav a {
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--muted);
+    transition: color 0.2s var(--ease-out-quart);
+  }
+  .site-head nav a:hover { color: var(--primary-deep); }
+
+  /* ---------- hero ---------- */
+  .hero {
+    background: linear-gradient(180deg, var(--primary-deep) 0%, oklch(0.52 0.17 357) 100%);
+    color: var(--cream);
+    overflow: clip;
+  }
+  .hero .wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+    padding-block: clamp(4rem, 9vw, 7rem) clamp(5rem, 10vw, 8rem);
+  }
+  @media (max-width: 46em) {
+    .hero .wrap { grid-template-columns: 1fr; gap: 3rem; }
+    .sticker { max-width: 15rem; }
+  }
+  .hero h1 {
+    font-size: clamp(2.2rem, 4.4vw, 3.15rem);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--butter);
+  }
+  .hero-kicker {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: oklch(0.90 0.06 20);
+    margin-bottom: 0.9rem;
+  }
+  .hero p.lede {
+    max-width: 34em;
+    margin-top: 1.2rem;
+    font-size: clamp(1.02rem, 1.6vw, 1.14rem);
+    line-height: 1.9;
+    color: oklch(0.958 0.02 20);
+  }
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2.2rem;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 999px;
+    padding: 0.78em 1.6em;
+    transition: transform 0.25s var(--ease-out-quart), background 0.25s var(--ease-out-quart);
+  }
+  .btn-solid {
+    background: var(--butter);
+    color: var(--ink);
+  }
+  .btn-solid:hover { background: oklch(0.935 0.10 90); transform: translateY(-2px); }
+  .btn-ghost {
+    border: 1.5px solid color-mix(in oklab, var(--cream) 55%, transparent);
+    color: var(--cream);
+  }
+  .btn-ghost:hover {
+    border-color: var(--cream);
+    background: color-mix(in oklab, var(--cream) 12%, transparent);
+    transform: translateY(-2px);
+  }
+
+  /* hero avatar sticker */
+  .sticker {
+    justify-self: center;
+    position: relative;
+    max-width: min(20rem, 100%);
+    transform: rotate(2.5deg);
+    animation: floaty 7s ease-in-out infinite;
+  }
+  .sticker img {
+    border: 6px solid var(--cream);
+    border-radius: 18px;
+    box-shadow: 0 8px 24px oklch(0.2 0.1 355 / 0.35);
+  }
+  .sticker::before {
+    content: "";
+    position: absolute;
+    top: -0.85rem;
+    left: 50%;
+    width: 5.5rem;
+    height: 1.7rem;
+    translate: -50% 0;
+    background: color-mix(in oklab, var(--mint) 82%, transparent);
+    rotate: -3deg;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px oklch(0.2 0.1 355 / 0.18);
+  }
+  .sticker-note {
+    position: absolute;
+    right: -1.1rem;
+    bottom: -1.4rem;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    background: var(--butter);
+    padding: 0.45em 1em;
+    border-radius: 999px;
+    rotate: -4deg;
+    box-shadow: 0 4px 8px oklch(0.2 0.1 355 / 0.22);
+  }
+  @keyframes floaty {
+    0%, 100% { transform: rotate(2.5deg) translateY(0); }
+    50% { transform: rotate(2.5deg) translateY(-0.55rem); }
+  }
+
+  /* hero entrance */
+  .rise {
+    animation: rise 0.9s var(--ease-out-quart) both;
+  }
+  .d1 { animation-delay: 0.08s; }
+  .d2 { animation-delay: 0.18s; }
+  .d3 { animation-delay: 0.28s; }
+  .d4 { animation-delay: 0.40s; }
+  @keyframes rise {
+    from { opacity: 0; translate: 0 1.4rem; }
+    to { opacity: 1; translate: 0 0; }
+  }
+
+  /* ---------- marquee ---------- */
+  .marquee {
+    background: var(--butter);
+    color: var(--ink);
+    border-block: 1.5px solid color-mix(in oklab, var(--ink) 18%, transparent);
+    overflow: hidden;
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    padding-block: 0.7rem;
+    animation: scroll 26s linear infinite;
+  }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  .marquee-track span {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    white-space: nowrap;
+    padding-inline: 1.4rem;
+  }
+  .marquee-track span i {
+    font-style: normal;
+    color: var(--primary-deep);
+    padding-inline-start: 1.4rem;
+  }
+  @keyframes scroll {
+    to { translate: -50% 0; }
+  }
+
+  /* ---------- sections ---------- */
+  section { padding-block: var(--space-section); }
+
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: clamp(2rem, 5vw, 3.2rem);
+  }
+  .sec-head h2 {
+    font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+    font-weight: 700;
+    color: var(--primary-deep);
+  }
+  .sec-head .en {
+    font-family: var(--font-display);
+    color: var(--muted);
+    font-size: 1rem;
+    letter-spacing: 0.06em;
+  }
+
+  /* works */
+  .works {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: clamp(1.1rem, 2.5vw, 1.8rem);
+  }
+  .work { text-decoration: none; }
+  .work-1 { grid-column: span 12; }
+  .work-2, .work-3 { grid-column: span 12; }
+
+  @media (min-width: 46em) {
+    .work-1 { grid-column: 1 / 8; grid-row: 1 / 3; }
+    .work-2 { grid-column: 8 / 13; grid-row: 1; }
+    .work-3 { grid-column: 8 / 13; grid-row: 2; }
+  }
+  .work figure {
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--surface);
+    box-shadow: 0 2px 6px oklch(0.3 0.08 350 / 0.10);
+    transition: transform 0.35s var(--ease-out-quart), box-shadow 0.35s var(--ease-out-quart);
+  }
+  .work:hover figure {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px oklch(0.3 0.08 350 / 0.16);
+  }
+  .work img {
+    width: 100%;
+    aspect-ratio: 4 / 3.2;
+    object-fit: cover;
+    transition: scale 0.5s var(--ease-out-quart);
+  }
+  @media (min-width: 46em) {
+    .work-1 img { aspect-ratio: 4 / 4.4; }
+  }
+  .work:hover img { scale: 1.035; }
+  .work figcaption {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 0.35rem 0;
+  }
+  .work h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+  .work .year {
+    font-size: 0.85rem;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+  .work .desc {
+    padding: 0.15rem 0.35rem 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* about */
+  .about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 6vw, 5rem);
+  }
+  @media (max-width: 46em) {
+    .about-grid { grid-template-columns: 1fr; }
+  }
+  .about p + p { margin-top: 1em; }
+  .about .body { max-width: 36em; }
+  .fact-list {
+    list-style: none;
+    display: grid;
+    gap: 0.85rem;
+  }
+  .fact-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+  }
+  .fact-list li::before {
+    content: "";
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--primary);
+    flex-shrink: 0;
+    translate: 0 -0.1rem;
+  }
+  .fact-list b { font-weight: 700; }
+  .tools {
+    margin-top: 1.6rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .tools span {
+    font-size: 0.86rem;
+    font-weight: 500;
+    padding: 0.3em 0.95em;
+    border-radius: 999px;
+    background: var(--surface-2);
+    color: var(--primary-deep);
+  }
+
+  /* services */
+  .services {
+    background: var(--surface);
+    border-block: 1.5px solid color-mix(in oklab, var(--primary) 14%, transparent);
+  }
+  .service-row {
+    display: grid;
+    grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+    gap: clamp(1rem, 4vw, 3rem);
+    padding-block: clamp(1.4rem, 3vw, 2rem);
+    border-bottom: 1.5px dashed color-mix(in oklab, var(--primary) 22%, transparent);
+  }
+  .service-row:last-child { border-bottom: 0; }
+  .service-row h3 {
+    font-size: clamp(1.25rem, 2.4vw, 1.55rem);
+    font-weight: 700;
+  }
+  .service-row p {
+    color: var(--muted);
+    max-width: 44em;
+  }
+  @media (max-width: 40em) {
+    .service-row { grid-template-columns: 1fr; gap: 0.4rem; }
+  }
+
+  /* contact */
+  .contact-box {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-deep) 100%);
+    color: var(--cream);
+    border-radius: 20px;
+    padding: clamp(2.2rem, 6vw, 4.5rem);
+    text-align: center;
+    position: relative;
+    overflow: clip;
+  }
+  .contact-box h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700;
+  }
+  .contact-box p {
+    margin: 1rem auto 0;
+    max-width: 30em;
+    color: oklch(0.945 0.025 20);
+  }
+  .contact-box .btn { margin-top: 2rem; }
+  .contact-socials {
+    margin-top: 2.4rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+  }
+  .contact-socials a {
+    font-size: 0.92rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0.45em 1.25em;
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--cream) 16%, transparent);
+    transition: background 0.25s var(--ease-out-quart), transform 0.25s var(--ease-out-quart);
+  }
+  .contact-socials a:hover {
+    background: color-mix(in oklab, var(--cream) 30%, transparent);
+    transform: translateY(-2px);
+  }
+  .dot {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+  .dot-a { width: 7rem; height: 7rem; background: var(--butter); top: -2.5rem; right: -2rem; }
+  .dot-b { width: 4rem; height: 4rem; background: var(--butter); bottom: -1.2rem; left: 8%; }
+
+  /* footer */
+  footer {
+    padding-block: 2.2rem 2.6rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  footer .logo { font-size: 1.15rem; justify-content: center; margin-bottom: 0.4rem; }
+
+  /* ---------- reduced motion ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .rise, .logo span, .sticker { animation: none; }
+    .marquee-track { animation: none; flex-wrap: wrap; width: auto; }
+    .work, .work img, .btn, .contact-socials a {
+      transition: none;
+    }
+    .work:hover img { scale: 1; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="owo 首頁"><span>o</span><span>w</span><span>o</span></a>
+    <nav aria-label="主選單">
+      <a href="#works">作品</a>
+      <a href="#about">關於</a>
+      <a href="#contact">聯絡</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- hero -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="hero-kicker rise">自由插畫與視覺設計 ✦</p>
+        <h1 class="rise d1">嗨，我是 <em>owo</em>。<br>把可愛畫得剛剛好。</h1>
+        <p class="lede rise d2">白天畫角色、貼圖和書頁插畫，晚上把版面排到每個像素都對齊。喜歡草莓牛奶、紙膠帶，和剛拆封的新畫本的味道。</p>
+        <div class="hero-cta rise d3">
+          <a class="btn btn-solid" href="#works">看看作品</a>
+          <a class="btn btn-ghost" href="#contact">寫信給我</a>
+        </div>
+      </div>
+      <div class="sticker rise d4">
+        <img src="https://images.pexels.com/photos/29765807/pexels-photo-29765807.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="owo 的工作桌平鋪：粉紅色調的文具、咖啡與乾燥花">
+        <span class="sticker-note" aria-hidden="true">我的工作桌 ◞</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- marquee -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>角色插畫<i>✦</i></span><span>貼圖設計<i>✦</i></span><span>書籍配圖<i>✦</i></span><span>品牌小視覺<i>✦</i></span><span>社群版型<i>✦</i></span>
+      <span>角色插畫<i>✦</i></span><span>貼圖設計<i>✦</i></span><span>書籍配圖<i>✦</i></span><span>品牌小視覺<i>✦</i></span><span>社群版型<i>✦</i></span>
+    </div>
+  </div>
+
+  <!-- works -->
+  <section id="works">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>作品精選</h2>
+        <span class="en">selected works</span>
+      </div>
+      <div class="works">
+        <a class="work work-1" href="#contact">
+          <figure>
+            <img src="https://images.pexels.com/photos/31581061/pexels-photo-31581061.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="作品示意：粉紅色調的文具與小物平鋪拍攝，作為貼圖包的概念板">
+          </figure>
+          <figcaption>
+            <h3>文具好朋友</h3>
+            <span class="year">2026</span>
+          </figcaption>
+          <p class="desc">貼圖包專案的概念板。把粉紅濃度調到剛剛好，讓可愛有個性、不甜膩，上線首月突破兩萬次下載。</p>
+        </a>
+        <a class="work work-2" href="#contact">
+          <figure>
+            <img src="https://images.pexels.com/photos/18160775/pexels-photo-18160775.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="作品示意：白瓷盤上的草莓鮮奶油蛋糕切片，草莓季活動視覺">
+          </figure>
+          <figcaption>
+            <h3>草莓季的三點</h3>
+            <span class="year">2025</span>
+          </figcaption>
+          <p class="desc">甜點店的季節活動視覺，從菜單、櫥窗立牌到社群貼文一起成套，草莓是唯一主角。</p>
+        </a>
+        <a class="work work-3" href="#contact">
+          <figure>
+            <img src="https://images.pexels.com/photos/29765809/pexels-photo-29765809.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="作品示意：粉紅色平鋪的底片相機、咖啡與文具，相機店開幕視覺">
+          </figure>
+          <figcaption>
+            <h3>底片好好拍</h3>
+            <span class="year">2025</span>
+          </figcaption>
+          <p class="desc">相機店開幕的品牌視覺，logo、店內立牌到開幕限定的包裝貼紙一次到位，粉色裡帶一點復古。</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- about -->
+  <section id="about" class="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>關於我</h2>
+        <span class="en">about</span>
+      </div>
+      <div class="about-grid">
+        <div class="body">
+          <p>我是 owo，插畫與視覺設計的自由工作者。接案四年，最擅長的是把「可愛」控制在不甜膩的濃度：顏色少一點、形狀圓一點、細節多想一點。</p>
+          <p>客戶從出版社、咖啡廳到小小的個人品牌都有。合作的時候我會先聊清楚用途與受眾，再開始動筆；草圖到完稿的來回，不超過兩次。</p>
+          <div class="tools" aria-label="常用工具">
+            <span>Procreate</span><span>Photoshop</span><span>Illustrator</span><span>Figma</span>
+          </div>
+        </div>
+        <ul class="fact-list">
+          <li><b>目前在做：</b>兩本童書的內頁插畫</li>
+          <li><b>最喜歡的委託：</b>能畫食物的那種</li>
+          <li><b>靈感來源：</b>便利商店的季節商品架</li>
+          <li><b>接案狀態：</b>2026 年 12 月後有空檔</li>
+          <li><b>座右銘：</b>先吃早餐，再談夢想</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- services -->
+  <section class="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>可以找我做</h2>
+        <span class="en">services</span>
+      </div>
+      <div class="service-row">
+        <h3>插畫委託</h3>
+        <p>角色、場景、書籍與專欄配圖。從聊需求、構圖草圖到完稿，過程透明，改稿來回兩次。</p>
+      </div>
+      <div class="service-row">
+        <h3>貼圖設計</h3>
+        <p>LINE 貼圖與社群表情包，含靜態 24 入或動態 16 入，附審查尺寸與上架建議。</p>
+      </div>
+      <div class="service-row">
+        <h3>品牌小視覺</h3>
+        <p>個人品牌與小工作室的 logo、包裝貼紙、社群版型，一次講好風格方向就不再飄。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- contact -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-box">
+        <span class="dot dot-a" aria-hidden="true"></span>
+        <span class="dot dot-b" aria-hidden="true"></span>
+        <h2>有點子想一起畫出來嗎？</h2>
+        <p>把用途、時程和大預算寫進信裡，我會附上報價和近期可接的時段。通常三天內回信。</p>
+        <a class="btn btn-solid" href="mailto:hello@owo.art">寫信給我：hello@owo.art</a>
+        <div class="contact-socials">
+          <a href="#" aria-label="Instagram（連結待補）">Instagram</a>
+          <a href="#" aria-label="X（連結待補）">X / Twitter</a>
+          <a href="#" aria-label="Pixiv（連結待補）">Pixiv</a>
+          <a href="#" aria-label="Behance（連結待補）">Behance</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <a class="logo" href="#top" aria-label="回到頁首"><span>o</span><span>w</span><span>o</span></a>
+  <p>© <span id="year">2026</span> owo · 插畫與視覺設計，草莓牛奶工作室出品</p>
+  <p>示範圖片來自 Pexels，正式上線時可換成自己的作品</p>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

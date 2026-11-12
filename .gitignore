@@ -1,0 +1,10 @@
+# AI tooling
+.agents/
+skills-lock.json
+
+# Design screenshots
+.shots/
+
+# OS / editor
+Thumbs.db
+.DS_Store
